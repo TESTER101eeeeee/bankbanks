@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWESOME BANK Dashboard</title>
+    <style>
+        /* Resetting margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            width: 100%;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome {
+            margin-top: 100px; /* Spacing below the fixed header */
+            font-size: 1.8em;
+            color: #333;
+            text-align: center;
+        }
+
+        .dashboard-content {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #555;
+            text-align: center;
+            padding: 0 20px; /* Small padding for smaller screens */
+        }
+
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .actions button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            width: 200px;
+        }
+
+        .actions button:hover {
+            background-color: #0056b3;
+        }
+
+        .logout {
+            margin-top: 30px;
+        }
+
+        .logout button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .logout button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        AWESOME BANK Dashboard
+    </div>
+
+    <div class="welcome">
+        Welcome to Your Dashboard, <span id="username">User</span>!
+    </div>
+
+    <div class="dashboard-content">
+        Manage your account balance and enjoy our awesome features!
+    </div>
+
+    <!-- Action buttons -->
+    <div class="actions">
+        <button onclick="redirectToHack()">Withdraw Money</button>
+        <button onclick="redirectToHack()">Deposit Money</button>
+    </div>
+
+    <div class="logout">
+        <form action="index.html" method="GET">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+
+    <script>
+        // Display the username if passed from the login form
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username') || 'User';
+        document.getElementById('username').textContent = username;
+
+        // Redirect both buttons to hack.html
+        function redirectToHack() {
+            window.location.href = "hack.html";
+        }
+    </script>
+</body>
+</html>

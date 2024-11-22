@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWESOME BANK Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            overflow: hidden;
+        }
+        .header {
+            width: 100%;
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 2em;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        .login-container {
+            position: absolute;
+            top: 150px;
+            left: 50px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            z-index: 2;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333333;
+            display: flex;
+            align-items: center;
+        }
+        .typing-text {
+            display: inline;
+            font-family: monospace;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .cursor {
+            width: 10px;
+            height: 10px;
+            background-color: #007bff;
+            border-radius: 50%;
+            margin-left: 5px;
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+        .login-option {
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+        .login-option h3 {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        /* Falling bills effect */
+        .falling-bills {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .bill {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background-color: rgba(34, 139, 34, 0.5); /* Semi-transparent green */
+            border-radius: 5px;
+            transform: rotate(15deg);
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Copyright icon */
+        .copyright {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .tooltip {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            background-color: #000;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .copyright:hover + .tooltip {
+            display: block;
+        }
+
+        /* Embedded image */
+        .embed-container {
+            position: absolute;
+            top: 50%;
+            right: 50px;
+            transform: translateY(-50%);
+            width: 300px;
+            height: auto;
+        }
+        .embed-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Semi-transparent text */
+        .demo-text {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            font-size: 1.2em;
+            font-style: italic;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        AWESOME BANK
+    </div>
+    
+    <!-- Falling money bills -->
+    <div class="falling-bills" id="fallingBills"></div>
+
+    <div class="login-container">
+        <h2>
+            <span class="typing-text" id="typingText">Login</span>
+            <div class="cursor"></div>
+        </h2>
+        <form action="logged-in.html" method="GET">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        
+        <div class="login-option">
+            <h3>Or Login with Card Number and PIN</h3>
+            <form action="logged-in.html" method="GET">
+                <input type="text" name="cardNumber" placeholder="Card Number" required>
+                <input type="password" name="pin" placeholder="PIN" required>
+                <button type="submit">Login with Card</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Embedded image -->
+    <div class="embed-container">
+        <img src="https://docs.google.com/drawings/d/e/2PACX-1vQNhUnzGQLtCPtJw2QilSh0loMcAWUKpcnOJmbQ-CcflgaUuA0p4u7QSLFu26angsT4O0yGBdI3vPn9/pub?w=960&amp;h=720" alt="Embedded Image">
+    </div>
+
+    <!-- Copyright Icon -->
+    <div class="copyright">©</div>
+    <div class="tooltip">COOOOOOOOL</div>
+
+    <!-- Demo Text -->
+    <div class="demo-text">Demonstration purposes only</div>
+
+    <script>
+        const phrases = ["Login", "Bank Awesome", "Best Bank"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        const typingSpeed = 150;
+        const erasingSpeed = 100;
+        const typingText = document.getElementById("typingText");
+
+        function typePhrase() {
+            if (charIndex < phrases[phraseIndex].length) {
+                typingText.textContent += phrases[phraseIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typePhrase, typingSpeed);
+            } else {
+                setTimeout(erasePhrase, 1000);
+            }
+        }
+
+        function erasePhrase() {
+            if (charIndex > 0) {
+                typingText.textContent = phrases[phraseIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erasePhrase, erasingSpeed);
+            } else {
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(typePhrase, 500);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            typePhrase();
+            generateFallingBills();
+        });
+
+        function generateFallingBills() {
+            const billContainer = document.getElementById("fallingBills");
+            const billCount = 10;
+
+            for (let i = 0; i < billCount; i++) {
+                const bill = document.createElement("div");
+                bill.classList.add("bill");
+                bill.style.left = `${Math.random() * 100}vw`;
+                bill.style.animationDuration = `${Math.random() * 2 + 3}s`;
+                billContainer.appendChild(bill);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HACKED!</title>
+    <style>
+        /* Resetting margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: black;
+            color: red;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            animation: backgroundBlink 1s infinite alternate;
+        }
+
+        @keyframes backgroundBlink {
+            0% {
+                background-color: #000;
+            }
+            100% {
+                background-color: #FF0000;
+            }
+        }
+
+        .message {
+            font-size: 3em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: glitch 1s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 0px 0px rgba(255, 0, 0, 0.8), -2px 0px 0px rgba(0, 0, 255, 0.8);
+                transform: skew(0deg);
+            }
+            25% {
+                text-shadow: 3px 0px 2px rgba(255, 0, 0, 0.8), -3px 0px 2px rgba(0, 0, 255, 0.8);
+                transform: skew(0.5deg);
+            }
+            50% {
+                text-shadow: -3px 0px 2px rgba(255, 0, 0, 0.8), 3px 0px 2px rgba(0, 0, 255, 0.8);
+                transform: skew(-0.5deg);
+            }
+            75% {
+                text-shadow: 2px 0px 0px rgba(255, 0, 0, 0.8), -2px 0px 0px rgba(0, 0, 255, 0.8);
+                transform: skew(0deg);
+            }
+            100% {
+                text-shadow: 0px 0px 0px rgba(255, 0, 0, 0.8), 0px 0px 0px rgba(0, 0, 255, 0.8);
+                transform: skew(0deg);
+            }
+        }
+
+        .sub-message {
+            font-size: 1.5em;
+            color: #fff;
+            margin-top: 20px;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .back-btn {
+            font-size: 1.2em;
+            color: #fff;
+            text-decoration: none;
+            background-color: #ff4d4d;
+            padding: 15px 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #ff0000;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="message">
+        You Have Been Hacked!
+    </div>
+
+    <div class="sub-message">
+        All Your Data Is Now In Our Hands...
+    </div>
+
+    <a href="index.html" class="back-btn">Go Back</a>
+
+</body>
+</html>
